@@ -4,5 +4,21 @@
     "header": {
         "Server": "hwahyang.space v2",
         "x-powered-by": "hwahyang.space v2"
+    },
+    "database": {
+        "host": "127.0.0.1",
+        "user": "USERNAME",
+        "password": "PASSWORD",
+        "database": "DATABASE",
+        "connectionLimit": 10,
+        "queueLimit": 0,
+        "keepAliveInitialDelay": 10000
+    },
+    "security": {
+        "passwordIteration": 10000,
+        "accessTokenSecret": "SECRET",
+        "accessTokenExpires": "3h",
+        "refreshTokenSecret": "SECRET",
+        "refreshTokenExpires": "3d"
     }
 }
