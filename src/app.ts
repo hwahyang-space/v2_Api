@@ -1,6 +1,6 @@
 import express from 'express';
 
-import ExceptionHandler from './modules/exceptionHandler';
+import ExceptionHandler from './modules/express/exceptionHandler';
 import MySQLConnector from './modules/mysqlConnector';
 
 const config = require('../config/config.json');
