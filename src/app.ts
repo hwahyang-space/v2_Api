@@ -1,6 +1,7 @@
 import express from 'express';
 
 import ExceptionHandler from './modules/exceptionHandler';
+import MySQLConnector from './modules/mysqlConnector';
 
 const config = require('../config/config.json');
 
@@ -22,6 +23,7 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 // Exception Handling
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
 
-const httpServer = app.listen(config.serverPort, config.ServerHost, () => {
-	console.log(`hwahyang.space v2 API is listening on ${config.ServerHost}:${config.serverPort}`);
+const httpServer = app.listen(config.serverPort, config.serverHost, () => {
+	MySQLConnector.Instance(); // Constructor 호출로 DB 연결
+	console.log(`hwahyang.space v2 API is listening on ${config.serverHost}:${config.serverPort}`);
 });
