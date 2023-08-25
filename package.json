@@ -1,0 +1,37 @@
+{
+  "name": "api.hwahyang.space_v2",
+  "version": "1.0.0",
+  "description": "hwahyang.space v2 api",
+  "main": "dist/app.js",
+  "scripts": {
+    "update-dependencies": "npx ncu -u && npm i -D --save",
+    "test": "ts-node src/app.ts",
+    "build": "tsc --project tsconfig.json",
+    "run": "node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwahyang-space/v2_Api.git"
+  },
+  "author": "HwaHyang",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/hwahyang-space/v2_Api/issues"
+  },
+  "homepage": "https://hwahyang.space",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.5.6",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
