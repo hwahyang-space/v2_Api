@@ -14,8 +14,8 @@ app.use(express.json(), express.urlencoded({ extended: true }));
 
 // Header
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-	res.setHeader('Server', config.express.header.Server);
-	res.setHeader('x-powered-by', config.express.header['x-powered-by']);
+	res.setHeader('Server', config.header.Server);
+	res.setHeader('x-powered-by', config.header['x-powered-by']);
 	next();
 });
 
