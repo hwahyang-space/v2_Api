@@ -1,9 +1,9 @@
 import express from 'express';
 
-import StatusCode from '../templates/StatusCode';
+import StatusCode from '../../templates/StatusCode';
 
 class ExceptionHandler {
-	public static UnhandledExceptionHandler = (
+	public UnhandledExceptionHandler = (
 		err: Error,
 		req: express.Request,
 		res: express.Response,
@@ -15,7 +15,7 @@ class ExceptionHandler {
 		);
 	};
 
-	public static NotFoundExceptionHandler = (
+	public NotFoundExceptionHandler = (
 		req: express.Request,
 		res: express.Response,
 		next: express.NextFunction

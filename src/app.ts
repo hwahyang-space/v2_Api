@@ -20,7 +20,7 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 });
 
 // Exception Handling
-app.use(ExceptionHandler.NotFoundExceptionHandler, ExceptionHandler.UnhandledExceptionHandler);
+app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
 
 const httpServer = app.listen(config.serverPort, config.ServerHost, () => {
 	console.log(`hwahyang.space v2 API is listening on ${config.ServerHost}:${config.serverPort}`);
