@@ -12,6 +12,7 @@ import MySQLConnector from './mysqlConnector';
 
 import StatusCode from '../templates/StatusCode';
 import IUsers from '../templates/databases/users';
+import IUserResponse from '../templates/responses/IUserResponse';
 import IApprovalCodes from '../templates/databases/approvalcodes';
 import ITokenResponse from '../templates/responses/ITokenResponse';
 
@@ -42,6 +43,8 @@ class UserManager {
 		userEmail: string,
 		userPassword: string
 	): Promise<StatusCode | ITokenResponse> => {
+		const now = dayjs();
+
 		// 이메일 기반으로 유저 정보 획득
 		const userData = (await MySQLConnector.Instance().QueryDataPacket(
 			'SELECT * FROM users WHERE email = ?',
@@ -72,6 +75,12 @@ class UserManager {
 				'Email or password does not match.'
 			);
 		} else {
+			// 최근 접속일 갱신
+			MySQLConnector.Instance().Query('UPDATE users SET lastLoggedInAt = ? WHERE uuid = ?', [
+				now.unix(),
+				userData[0].uuid,
+			]);
+
 			// 토큰 발급
 			return tokenManager.createSessionToken(userData[0].uuid);
 		}
@@ -170,6 +179,28 @@ class UserManager {
 
 		// 토큰 발급
 		return tokenManager.createSessionToken(uuid);
+	};
+
+	public getUserData = async (uuid: string): Promise<StatusCode | IUserResponse> => {
+		const userData = (await MySQLConnector.Instance().QueryDataPacket(
+			'SELECT * FROM users WHERE uuid = ?',
+			[uuid]
+		)) as IUsers[];
+
+		if (Object.keys(userData).length === 0) {
+			return new StatusCode(404, 'User Not Found', 'Invalid uuid.');
+		}
+
+		const returnData: IUserResponse = {
+			uuid: userData[0].uuid,
+			userName: userData[0].userName,
+			email: userData[0].email,
+			agreeTerms: userData[0].agreeTerms,
+			createdAt: userData[0].createdAt,
+			lastLoggedInAt: userData[0].lastLoggedInAt,
+			type: 'IUserResponse',
+		};
+		return returnData;
 	};
 }
 

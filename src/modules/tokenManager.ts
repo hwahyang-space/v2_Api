@@ -5,6 +5,8 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
+import MySQLConnector from './mysqlConnector';
+
 import ITokenPayload from '../templates/ITokenPayload';
 import ITokenResponse from '../templates/responses/ITokenResponse';
 import StatusCode from '../templates/StatusCode';
@@ -101,11 +103,20 @@ class TokenManager {
 	};
 
 	public refreshSessionToken = (refreshToken: string): StatusCode | ITokenResponse => {
+		const now = dayjs();
+
 		const tokenRawResponse = this.validateSessionToken(refreshToken, false);
 		if (tokenRawResponse instanceof StatusCode) {
 			return tokenRawResponse as StatusCode;
 		} else {
 			const tokenResponse = tokenRawResponse as ITokenPayload;
+
+			// 최근 접속일 갱신
+			MySQLConnector.Instance().Query('UPDATE users SET lastLoggedInAt = ? WHERE uuid = ?', [
+				now.unix(),
+				tokenResponse.uuid,
+			]);
+
 			return this.createSessionToken(tokenResponse.uuid);
 		}
 	};
