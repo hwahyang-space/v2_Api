@@ -24,13 +24,13 @@ const limiter = rateLimit({
 	max: config.rateLimiter.maxRate,
 	standardHeaders: true,
 	legacyHeaders: false,
-	skip: (request, response) => config.rateLimiter.allowlist.includes(request.ip),
+	skip: (req, res) => config.rateLimiter.allowlist.includes(req.ip),
 	handler: exceptionHandler.RateLimitedExceptionHandler,
 });
 
+app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(limiter);
-app.use(express.json(), express.urlencoded({ extended: true }));
 
 // Header
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
