@@ -1,4 +1,6 @@
+import cors from 'cors';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 
 import ExceptionHandler from './modules/express/exceptionHandler';
 import MySQLConnector from './modules/mysqlConnector';
@@ -11,6 +13,21 @@ const app = express();
 const exceptionHandler = new ExceptionHandler();
 
 // Config
+const corsOptions = {
+	origin: config.corsOrigins,
+	//credential: true,
+};
+const limiter = rateLimit({
+	windowMs: config.rateLimiter.unitMinutes * 60 * 1000,
+	max: config.rateLimiter.maxRate,
+	standardHeaders: true,
+	legacyHeaders: false,
+	skip: (request, response) => config.rateLimiter.allowlist.includes(request.ip),
+	handler: exceptionHandler.RateLimitedExceptionHandler,
+});
+
+app.use(cors(corsOptions));
+app.use(limiter);
 app.use(express.json(), express.urlencoded({ extended: true }));
 
 // Header

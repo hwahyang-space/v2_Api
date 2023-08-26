@@ -22,6 +22,14 @@ class ExceptionHandler {
 	) => {
 		res.status(404).json(new StatusCode(404, 'Not Found', '올바르지 않은 접근입니다.'));
 	};
+
+	public RateLimitedExceptionHandler = (
+		req: express.Request,
+		res: express.Response,
+		next: express.NextFunction
+	) => {
+		res.status(429).json(new StatusCode(429, 'Too Many Requests', '잠시 후 다시 시도 해 주세요.'));
+	};
 }
 
 export default ExceptionHandler;

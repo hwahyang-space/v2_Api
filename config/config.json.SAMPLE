@@ -1,6 +1,16 @@
 {
     "serverHost": "127.0.0.1",
     "serverPort": 8080,
+    "corsOrigins": [
+        "https://example.com"
+    ],
+    "rateLimiter": {
+        "unitMinutes": 15,
+        "maxRate": 10,
+        "allowlist": [
+            "127.0.0.1"
+        ]
+    },
     "header": {
         "Server": "hwahyang.space v2",
         "x-powered-by": "hwahyang.space v2"
