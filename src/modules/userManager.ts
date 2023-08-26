@@ -94,7 +94,7 @@ class UserManager {
 		agreeTerms: boolean
 	): Promise<StatusCode | ITokenResponse> => {
 		// 정규식 검증
-		if (userName.match(this.nameRule)) {
+		if (!userName.match(this.nameRule)) {
 			return new StatusCode(
 				400,
 				'Not Conforming Rules',
@@ -102,11 +102,11 @@ class UserManager {
 			);
 		}
 
-		if (userEmail.match(this.emailRule)) {
+		if (!userEmail.match(this.emailRule)) {
 			return new StatusCode(400, 'Not Conforming Rules', 'Invalid e-mail format.');
 		}
 
-		if (userPassword.match(this.passwordRule)) {
+		if (!userPassword.match(this.passwordRule)) {
 			return new StatusCode(
 				400,
 				'Not Conforming Rules',
@@ -114,7 +114,7 @@ class UserManager {
 			);
 		}
 
-		if (approvalCode.match(this.approvalCodeRule)) {
+		if (!approvalCode.match(this.approvalCodeRule)) {
 			return new StatusCode(400, 'Not Conforming Rules', 'Invalid Approval Code format.');
 		}
 
