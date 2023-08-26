@@ -173,8 +173,8 @@ class UserManager {
 
 		// 회원 등록
 		await MySQLConnector.Instance().Query(
-			'INSERT INTO users(uuid, userName, email, password, salt, agreeTerms, createdAt, lastLoggedInAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-			[uuid, userName, userEmail, hashedPassword, salt, agreeTerms, now.unix(), now.unix()]
+			'INSERT INTO users(uuid, userName, email, password, salt, approvalcode, agreeTerms, createdAt, lastLoggedInAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+			[uuid, userName, userEmail, hashedPassword, salt, approvalCode, agreeTerms, now.unix(), now.unix()]
 		);
 
 		// 토큰 발급
