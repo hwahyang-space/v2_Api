@@ -11,6 +11,7 @@ const app = express();
 
 // Custom Module Instances
 const exceptionHandler = new ExceptionHandler();
+const authorize = new Authorize();
 
 // Config
 const corsOptions = {
@@ -36,6 +37,11 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 	res.setHeader('x-powered-by', config.header['x-powered-by']);
 	next();
 });
+
+// Authorize
+app.post('/v2/authorize/signIn', authorize.signIn);
+app.post('/v2/authorize/signUp', authorize.signUp);
+app.post('/v2/authorize/refresh', authorize.refreshToken);
 
 // Exception Handling
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
