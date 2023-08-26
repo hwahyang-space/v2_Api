@@ -6,6 +6,7 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
 import MySQLConnector from './mysqlConnector';
+import { LogLevel, LogManager } from './logManager';
 
 import ITokenPayload from '../templates/ITokenPayload';
 import ITokenResponse from '../templates/responses/ITokenResponse';
@@ -15,6 +16,8 @@ const config = require('../../config/config.json');
 
 // TODO: refresh 된 token은 폐기되어야 함 (아니면 무한복제 가능)
 class TokenManager {
+	private readonly logManager = new LogManager('TokenManager');
+
 	constructor() {
 		dayjs.extend(customParseFormat);
 		dayjs.extend(utc);
@@ -77,6 +80,8 @@ class TokenManager {
 			type: 'ITokenResponse',
 		};
 
+		this.logManager.log(LogLevel.LOG, `An token for user uuid ${uuid} has created.`);
+
 		return response;
 	};
 
@@ -116,6 +121,11 @@ class TokenManager {
 				now.unix(),
 				tokenResponse.uuid,
 			]);
+
+			this.logManager.log(
+				LogLevel.LOG,
+				`An token for user uuid ${tokenResponse.uuid} has refreshed.`
+			);
 
 			return this.createSessionToken(tokenResponse.uuid);
 		}

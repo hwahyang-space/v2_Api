@@ -30,5 +30,9 @@
         "accessTokenExpires": "3h",
         "refreshTokenSecret": "SECRET",
         "refreshTokenExpires": "3d"
+    },
+    "log": {
+        "workerInterval": 5000,
+        "logFileFormat": "Log_YYYY_MM_DD"
     }
 }

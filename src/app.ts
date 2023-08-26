@@ -5,14 +5,16 @@ import rateLimit from 'express-rate-limit';
 import Authorize from './modules/express/authorize';
 import MySQLConnector from './modules/mysqlConnector';
 import ExceptionHandler from './modules/express/exceptionHandler';
+import { LogLevel, LogManager, LogWorker } from './modules/logManager';
 
 const config = require('../config/config.json');
 
 const app = express();
 
 // Custom Module Instances
-const exceptionHandler = new ExceptionHandler();
 const authorize = new Authorize();
+const logManager = new LogManager('App.ts');
+const exceptionHandler = new ExceptionHandler();
 
 // Config
 const corsOptions = {
@@ -32,6 +34,12 @@ app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(limiter);
 
+// Log
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+	logManager.log(LogLevel.DEBUG, `${req.ip} -> ${req.url}`);
+	next();
+});
+
 // Header
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
 	res.setHeader('Server', config.header.Server);
@@ -49,6 +57,10 @@ app.post('/v2/authorize/me', authorize.validateToken, authorize.getCurrentUser);
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
 
 const httpServer = app.listen(config.serverPort, config.serverHost, () => {
+	LogWorker.Instance(); // Constructor 호출로 worker 실행
 	MySQLConnector.Instance(); // Constructor 호출로 DB 연결
-	console.log(`hwahyang.space v2 API is listening on ${config.serverHost}:${config.serverPort}`);
+	logManager.log(
+		LogLevel.LOG,
+		`hwahyang.space v2 API is listening on ${config.serverHost}:${config.serverPort}`
+	);
 });

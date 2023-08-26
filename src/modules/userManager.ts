@@ -9,6 +9,7 @@ import timezone from 'dayjs/plugin/timezone';
 
 import TokenManager from './tokenManager';
 import MySQLConnector from './mysqlConnector';
+import { LogLevel, LogManager } from './logManager';
 
 import StatusCode from '../templates/StatusCode';
 import IUsers from '../templates/databases/users';
@@ -25,6 +26,8 @@ class UserManager {
 	private emailRule = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]+$/;
 	private passwordRule = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 	private approvalCodeRule = /^[A-Z0-9]{8}$/;
+
+	private readonly logManager = new LogManager('UserManager');
 
 	constructor() {
 		dayjs.extend(customParseFormat);
@@ -80,6 +83,8 @@ class UserManager {
 				now.unix(),
 				userData[0].uuid,
 			]);
+
+			this.logManager.log(LogLevel.LOG, `An user '${userData[0].userName}' (with uuid ${userData[0].uuid}) successfully signed-in`);
 
 			// 토큰 발급
 			return tokenManager.createSessionToken(userData[0].uuid);
@@ -176,6 +181,8 @@ class UserManager {
 			'INSERT INTO users(uuid, userName, email, password, salt, approvalcode, agreeTerms, createdAt, lastLoggedInAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
 			[uuid, userName, userEmail, hashedPassword, salt, approvalCode, agreeTerms, now.unix(), now.unix()]
 		);
+
+		this.logManager.log(LogLevel.LOG, `An user '${userData[0].userName}' (with uuid ${userData[0].uuid}) successfully signed-up`);
 
 		// 토큰 발급
 		return tokenManager.createSessionToken(uuid);
