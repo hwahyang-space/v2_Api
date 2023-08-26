@@ -2,8 +2,9 @@ import cors from 'cors';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 
-import ExceptionHandler from './modules/express/exceptionHandler';
+import Authorize from './modules/express/authorize';
 import MySQLConnector from './modules/mysqlConnector';
+import ExceptionHandler from './modules/express/exceptionHandler';
 
 const config = require('../config/config.json');
 
