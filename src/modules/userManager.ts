@@ -62,7 +62,7 @@ class UserManager {
 		const key = await pbkdf2Sync(
 			userPassword,
 			userData[0].salt,
-			config.passwordIteration,
+			config.security.passwordIteration,
 			64,
 			'sha512'
 		);
@@ -162,7 +162,7 @@ class UserManager {
 		const key = await crypto.pbkdf2Sync(
 			userPassword,
 			salt,
-			config.passwordIteration,
+			config.security.passwordIteration,
 			64,
 			'sha512'
 		);

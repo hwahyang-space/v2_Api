@@ -59,12 +59,12 @@ class TokenManager {
 			.unix();
 		const refreshTokenExpiresAt = now
 			.add(
-				config.security.refreshTokenExpiresAt.slice(
+				config.security.refreshTokenExpires.slice(
 					0,
-					config.security.refreshTokenExpiresAt.length - 1
+					config.security.refreshTokenExpires.length - 1
 				),
-				config.security.refreshTokenExpiresAt.slice(
-					config.security.refreshTokenExpiresAt.length - 1
+				config.security.refreshTokenExpires.slice(
+					config.security.refreshTokenExpires.length - 1
 				)
 			)
 			.unix();
