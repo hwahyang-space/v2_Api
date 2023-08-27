@@ -15,7 +15,7 @@ const userManager = new UserManager();
 const tokenManager = new TokenManager();
 
 class Authorize {
-	public signIn = (req: ISignInRequest, res: express.Response) => {
+	public signIn = async (req: ISignInRequest, res: express.Response) => {
 		if (!req.body.email || !req.body.password) {
 			res.status(400).json(
 				new StatusCode(
@@ -27,12 +27,12 @@ class Authorize {
 			return;
 		}
 
-		const rawResponse = userManager.signIn(req.body.email, req.body.password);
+		const rawResponse = await userManager.signIn(req.body.email, req.body.password);
 		if (rawResponse instanceof StatusCode) {
 			const response = rawResponse as StatusCode;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as unknown as ITokenResponse;
+			const response = rawResponse as ITokenResponse;
 			res.json(response);
 		}
 	};
