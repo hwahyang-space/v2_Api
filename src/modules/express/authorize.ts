@@ -77,11 +77,13 @@ class Authorize {
 		res: express.Response,
 		next: express.NextFunction
 	) => {
-		if (!req.body.token) {
+		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
 			res.status(401).json(new StatusCode(401, 'Wrong Token', '유효하지 않은 세션입니다.'));
 			return;
 		}
-		const rawResponse = tokenManager.validateSessionToken(req.body.token);
+		const token = req.headers.authorization?.replace('Bearer ', '');
+
+		const rawResponse = tokenManager.validateSessionToken(token);
 		if (rawResponse instanceof StatusCode) {
 			const response = rawResponse as StatusCode;
 			res.status(response.code).json(response);
@@ -93,11 +95,13 @@ class Authorize {
 	};
 
 	public refreshToken = (req: ITokenRequest, res: express.Response) => {
-		if (!req.body.token) {
+		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
 			res.status(401).json(new StatusCode(401, 'Wrong Token', '유효하지 않은 세션입니다.'));
 			return;
 		}
-		const rawResponse = tokenManager.refreshSessionToken(req.body.token);
+		const token = req.headers.authorization?.replace('Bearer ', '');
+
+		const rawResponse = tokenManager.refreshSessionToken(token);
 		if (rawResponse instanceof StatusCode) {
 			const response = rawResponse as StatusCode;
 			res.status(response.code).json(response);
