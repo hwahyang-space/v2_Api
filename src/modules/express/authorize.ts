@@ -16,7 +16,7 @@ const tokenManager = new TokenManager();
 
 class Authorize {
 	public signIn = (req: ISignInRequest, res: express.Response) => {
-		if (!req.body.email || !req.body.password || !req.body.captcha) {
+		if (!req.body.email || !req.body.password) {
 			res.status(400).json(
 				new StatusCode(
 					400,

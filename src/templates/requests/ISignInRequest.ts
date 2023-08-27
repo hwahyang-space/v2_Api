@@ -4,7 +4,6 @@ interface ISignInRequest extends express.Request {
 	body: {
 		email?: string;
 		password?: string;
-        captcha?: string;
 	};
 }
 
