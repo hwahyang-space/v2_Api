@@ -99,7 +99,7 @@ class LogWorker {
 		const currentQueue = this.messageQueue;
 		this.messageQueue = '';
 
-		if (!(await fs.existsSync(this.rootPath))) {
+		if (!await fs.existsSync(this.rootPath)) {
 			await fs.mkdirSync(this.rootPath);
 		}
 
