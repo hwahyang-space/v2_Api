@@ -34,5 +34,15 @@
     "log": {
         "workerInterval": 5000,
         "logFileFormat": "Log_YYYY_MM_DD"
+    },
+    "swagger": {
+        "title":"hspace_v2",
+        "description":"hwahyang.space v2 API",
+        "servers": [
+            {
+                "url": "http://localhost:8080",
+                "description": "Local Test"
+            }
+        ]
     }
 }

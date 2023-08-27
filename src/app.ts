@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
 import rateLimit from 'express-rate-limit';
 
 import Authorize from './modules/express/authorize';
@@ -8,6 +9,7 @@ import ExceptionHandler from './modules/express/exceptionHandler';
 import { LogLevel, LogManager, LogWorker } from './modules/logManager';
 
 const config = require('../config/config.json');
+const swaggerConfig = require('./swagger/swagger-output.json');
 
 const app = express();
 
@@ -46,6 +48,9 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 	res.setHeader('x-powered-by', config.header['x-powered-by']);
 	next();
 });
+
+// Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
 
 // Authorize
 app.post('/v2/authorize/signIn', authorize.signIn);

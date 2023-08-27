@@ -143,10 +143,11 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 
-config/*.json
+/config/*.json
+/src/swagger/*.json
 
-!dist/
-dist/**/*
-!logs/
-logs/**/*
+!/dist/
+/dist/**/*
+!/logs/
+/logs/**/*
 !*.gitkeep
