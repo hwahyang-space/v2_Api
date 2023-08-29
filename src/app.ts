@@ -32,6 +32,7 @@ const limiter = rateLimit({
 	handler: exceptionHandler.RateLimitedExceptionHandler,
 });
 
+app.set('trust proxy', true);
 app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(limiter);
