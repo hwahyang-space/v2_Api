@@ -145,7 +145,7 @@ class Authorize {
 		next: express.NextFunction
 	) => {
 		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
-			res.status(401).json(new StatusCode(401, 'Wrong Token', '유효하지 않은 세션입니다.'));
+			res.status(401).json(new StatusCode(401, 'Wrong Token', 'Invalid session.'));
 			return;
 		}
 		const token = req.headers.authorization?.replace('Bearer ', '');
@@ -182,12 +182,12 @@ class Authorize {
 			schema: {
 				code: 401,
 				description: 'Wrong Token',
-				userDescription: '유효하지 않은 세션입니다.',
+				userDescription: 'Invalid session.',
 			}
   		}*/
 
 		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
-			res.status(401).json(new StatusCode(401, 'Wrong Token', '유효하지 않은 세션입니다.'));
+			res.status(401).json(new StatusCode(401, 'Wrong Token', 'Invalid session.'));
 			return;
 		}
 		const token = req.headers.authorization?.replace('Bearer ', '');
@@ -225,7 +225,7 @@ class Authorize {
 			schema: {
 				code: 401,
 				description: 'Wrong Token',
-				userDescription: '유효하지 않은 세션입니다.',
+				userDescription: 'Invalid session.',
 			}
   		}*/
 		/*#swagger.responses[404] = {
@@ -238,7 +238,7 @@ class Authorize {
   		}*/
 
 		if (!req.uuid) {
-			res.status(401).json(new StatusCode(401, 'Wrong Token', '유효하지 않은 세션입니다.'));
+			res.status(401).json(new StatusCode(401, 'Wrong Token', 'Invalid session.'));
 			return;
 		}
 
