@@ -32,7 +32,7 @@ const limiter = rateLimit({
 	handler: exceptionHandler.RateLimitedExceptionHandler,
 });
 
-app.set('trust proxy', true);
+app.set('trust proxy', config.trustProxy);
 app.use(express.json(), express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(limiter);
@@ -51,7 +51,9 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 });
 
 // Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+if (config.swagger.enabled) {
+	app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+}
 
 // Authorize
 app.post('/v2/authorize/signIn', authorize.signIn);

@@ -1,6 +1,7 @@
 {
     "serverHost": "127.0.0.1",
     "serverPort": 8080,
+    "trustProxy": false,
     "corsOrigins": [
         "https://example.com"
     ],
@@ -36,6 +37,7 @@
         "logFileFormat": "Log_YYYY_MM_DD"
     },
     "swagger": {
+        "enabled": false,
         "title":"hspace_v2",
         "description":"hwahyang.space v2 API",
         "servers": [
