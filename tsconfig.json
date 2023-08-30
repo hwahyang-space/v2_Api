@@ -16,6 +16,5 @@
 		"lib": ["ES2022", "esnext.asynciterable"],
 		"strict": true
 	},
-	"exclude": ["node_modules"],
-	"include": ["package.json"]
+	"exclude": ["node_modules"]
 }
