@@ -1,12 +1,10 @@
 import swaggerAutogen from 'swagger-autogen';
 
-import packageData from '../../package.json';
-
 const config = require('../../config/config.json');
 
 const options = {
 	info: {
-		version: packageData.version,
+		version: '1.0.0',
 		title: config.swagger.title,
 		description: config.swagger.description,
 	},
