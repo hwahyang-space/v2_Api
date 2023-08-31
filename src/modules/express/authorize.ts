@@ -275,7 +275,7 @@ class Authorize {
 			const response = rawResponse as StatusCode;
 			res.status(response.code);
 		} else {
-			res.status(200);
+			res.status(200).json(new StatusCode(200, '', ''));
 		}
 	};
 }
