@@ -52,15 +52,15 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 
 // Swagger UI
 if (config.swagger.enabled) {
-	app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+	app.use('/api/v2/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
 }
 
 // Authorize
-app.post('/v2/authorize/signIn', authorize.signIn);
-app.post('/v2/authorize/signUp', authorize.signUp);
-app.post('/v2/authorize/refresh', authorize.refreshToken);
-app.post('/v2/authorize/me', authorize.validateToken, authorize.getCurrentUser);
-app.post('/v2/authorize/validate', authorize.validate);
+app.post('/api/v2/authorize/signIn', authorize.signIn);
+app.post('/api/v2/authorize/signUp', authorize.signUp);
+app.post('/api/v2/authorize/refresh', authorize.refreshToken);
+app.post('/api/v2/authorize/me', authorize.validateToken, authorize.getCurrentUser);
+app.post('/api/v2/authorize/validate', authorize.validate);
 
 // Exception Handling
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
