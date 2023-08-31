@@ -264,7 +264,6 @@ class Authorize {
 		/*#swagger.responses[401] = {
 			description: '제공된 AccessToken이 유효하지 않은 경우 반환됩니다.'
   		}*/
-
 		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
 			res.status(401).json(new StatusCode(401, 'Wrong Token', 'Invalid session.'));
 			return;
@@ -277,7 +276,8 @@ class Authorize {
 			res.status(response.code);
 		} else {
 			res.status(200);
-		}	}
+		}
+	};
 }
 
 export default Authorize;
