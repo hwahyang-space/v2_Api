@@ -251,6 +251,33 @@ class Authorize {
 			res.status(200).json(response);
 		}
 	};
+
+	public validate = (req: ITokenRequest, res: express.Response) => {
+		//#swagger.summary = 'AccessToken의 유효성을 검증합니다.
+		//#swagger.tags = ['Authorize']
+		/*#swagger.security = [{
+            "bearerAuth": []
+    	}]*/
+		/*#swagger.responses[200] = {
+			description: '제공된 AccessToken이 유효 한 경우 반환됩니다.'
+  		}*/
+		/*#swagger.responses[401] = {
+			description: '제공된 AccessToken이 유효하지 않은 경우 반환됩니다.'
+  		}*/
+
+		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
+			res.status(401).json(new StatusCode(401, 'Wrong Token', 'Invalid session.'));
+			return;
+		}
+		const token = req.headers.authorization?.replace('Bearer ', '');
+
+		const rawResponse = tokenManager.validateSessionToken(token);
+		if (rawResponse instanceof StatusCode) {
+			const response = rawResponse as StatusCode;
+			res.status(response.code);
+		} else {
+			res.status(200);
+		}	}
 }
 
 export default Authorize;

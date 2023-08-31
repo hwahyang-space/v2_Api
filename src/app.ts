@@ -60,6 +60,7 @@ app.post('/v2/authorize/signIn', authorize.signIn);
 app.post('/v2/authorize/signUp', authorize.signUp);
 app.post('/v2/authorize/refresh', authorize.refreshToken);
 app.post('/v2/authorize/me', authorize.validateToken, authorize.getCurrentUser);
+app.post('/v2/authorize/validate', authorize.validate);
 
 // Exception Handling
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
