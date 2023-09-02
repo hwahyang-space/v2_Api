@@ -14,6 +14,10 @@ const options = {
 			name: 'Authorize',
 			description: '사용자의 인증과 관련된 사항을 정의합니다.',
 		},
+		{
+			name: 'Main',
+			description: '메인 페이지와 관련된 사항을 정의합니다.',
+		},
 	],
 	components: {
         securitySchemes:{

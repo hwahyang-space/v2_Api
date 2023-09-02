@@ -4,8 +4,10 @@ import swaggerUi from 'swagger-ui-express';
 import rateLimit from 'express-rate-limit';
 
 import Authorize from './modules/express/authorize';
-import MySQLConnector from './modules/mysqlConnector';
+import Main from './modules/express/main';
 import ExceptionHandler from './modules/express/exceptionHandler';
+
+import MySQLConnector from './modules/mysqlConnector';
 import { LogLevel, LogManager, LogWorker } from './modules/logManager';
 
 const config = require('../config/config.json');
@@ -15,6 +17,7 @@ const app = express();
 
 // Custom Module Instances
 const authorize = new Authorize();
+const main = new Main();
 const logManager = new LogManager('App.ts');
 const exceptionHandler = new ExceptionHandler();
 
@@ -61,6 +64,12 @@ app.post('/api/v2/authorize/signUp', authorize.signUp);
 app.post('/api/v2/authorize/refresh', authorize.refreshToken);
 app.post('/api/v2/authorize/me', authorize.validateToken, authorize.getCurrentUser);
 app.post('/api/v2/authorize/validate', authorize.validate);
+
+// Main
+app.get('/api/v2/Main/baseData', main.baseData);
+app.post('/api/v2/Main/baseData', authorize.validateToken, main.postBaseData);
+app.get('/api/v2/Main/links', main.links);
+app.post('/api/v2/Main/links', authorize.validateToken, main.postLinks);
 
 // Exception Handling
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
