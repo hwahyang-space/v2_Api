@@ -1,5 +1,7 @@
+import path from 'path';
 import cors from 'cors';
 import express from 'express';
+import favicon from 'serve-favicon';
 import swaggerUi from 'swagger-ui-express';
 import rateLimit from 'express-rate-limit';
 
@@ -70,6 +72,10 @@ app.get('/api/v2/Main/baseData', main.baseData);
 app.post('/api/v2/Main/baseData', authorize.validateToken, main.postBaseData);
 app.get('/api/v2/Main/links', main.links);
 app.post('/api/v2/Main/links', authorize.validateToken, main.postLinks);
+
+// Static
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use('/', express.static('src/public'));
 
 // Exception Handling
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
