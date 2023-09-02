@@ -259,10 +259,20 @@ class Authorize {
             "bearerAuth": []
     	}]*/
 		/*#swagger.responses[200] = {
-			description: '제공된 AccessToken이 유효 한 경우 반환됩니다.'
+			description: '제공된 AccessToken이 유효 한 경우 반환됩니다.',
+			schema: {
+				code: 200,
+				description: '',
+				userDescription: '',
+			}
   		}*/
 		/*#swagger.responses[401] = {
-			description: '제공된 AccessToken이 유효하지 않은 경우 반환됩니다.'
+			description: '제공된 AccessToken이 유효하지 않은 경우 반환됩니다.',
+			schema: {
+				code: 401,
+				description: 'Wrong Token',
+				userDescription: 'Invalid session.',
+			}
   		}*/
 		if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
 			res.status(401).json(new StatusCode(401, 'Wrong Token', 'Invalid session.'));
