@@ -11,10 +11,10 @@
 		"experimentalDecorators": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
-		"importHelpers": true,
+		"importHelpers": false,
 		"forceConsistentCasingInFileNames": true,
 		"lib": ["ES2022", "esnext.asynciterable"],
-		"strict": true
+		"strict": true,
 	},
 	"exclude": ["node_modules"]
 }
