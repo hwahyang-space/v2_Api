@@ -4,7 +4,7 @@
   "description": "hwahyang.space v2 api",
   "main": "dist/app.js",
   "scripts": {
-    "update-dependencies": "npx ncu -u && npm i -D --save",
+    "update-dependencies": "npm i -g npm-check-updates@latest && npx ncu -u && npm i -D --save",
     "test": "ts-node src/swagger/swaggerAutogen.ts && ts-node src/app.ts",
     "swagger-autogen": "ts-node src/swagger/swaggerAutogen.ts",
     "dev": "ts-node src/app.ts",
