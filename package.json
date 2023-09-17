@@ -6,9 +6,7 @@
   "scripts": {
     "update-dependencies": "npm i -g npm-check-updates@latest && npx ncu -u && npm i -D --save",
     "test": "ts-node src/swagger/swaggerAutogen.ts && ts-node src/app.ts",
-    "swagger-autogen": "ts-node src/swagger/swaggerAutogen.ts",
-    "dev": "ts-node src/app.ts",
-    "build": "tsc --project tsconfig.json",
+    "build": "ts-node src/swagger/swaggerAutogen.ts && tsc --project tsconfig.json",
     "run": "node dist/app.js"
   },
   "repository": {
