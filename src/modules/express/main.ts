@@ -58,7 +58,7 @@ class Main {
 			}
   		}*/
 		/*#swagger.responses[400] = {
-			description: '한 개 이상의 항목이 누락 된 경우나 입력 한 값이 규칙에 부합하지 않는 경우, 이미 존재하는 계정이 있는 경우 반환됩니다.',
+			description: '한 개 이상의 항목이 누락 된 경우나 입력 한 값이 규칙에 부합하지 않는 경우 반환됩니다.',
 			schema: {
 				code: 400,
 				description: 'Missing Parameters',
@@ -149,7 +149,7 @@ class Main {
 			}
   		}*/
 		/*#swagger.responses[400] = {
-			description: '한 개 이상의 항목이 누락 된 경우나 입력 한 값이 규칙에 부합하지 않는 경우, 이미 존재하는 계정이 있는 경우 반환됩니다.',
+			description: '한 개 이상의 항목이 누락 된 경우나 입력 한 값이 규칙에 부합하지 않는 경우 반환됩니다.',
 			schema: {
 				code: 400,
 				description: 'Missing Parameters',
