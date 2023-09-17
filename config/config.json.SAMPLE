@@ -25,6 +25,10 @@
         "queueLimit": 0,
         "keepAliveInitialDelay": 10000
     },
+    "redis": {
+        "host": "localhost",
+        "port": 6379
+    },
     "security": {
         "passwordIteration": 10000,
         "accessTokenSecret": "SECRET",
