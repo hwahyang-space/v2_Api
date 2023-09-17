@@ -18,6 +18,10 @@ const options = {
 			name: 'Main',
 			description: '메인 페이지와 관련된 사항을 정의합니다.',
 		},
+		{
+			name: 'File',
+			description: '파일과 관련된 사항을 정의합니다.',
+		},
 	],
 	components: {
         securitySchemes:{
