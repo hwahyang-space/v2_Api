@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN if [ ! -f ./config/config.json ]; then cp ./config/config.json.SAMPLE ./config/config.json; fi
 RUN npm run build
 
 # Run
