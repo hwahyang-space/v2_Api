@@ -24,6 +24,7 @@
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dayjs": "^1.11.19",
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "express-rate-limit": "^8.2.1",
     "ftp": "^0.3.10",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.6",
     "@types/ftp": "^0.3.36",
     "@types/jsonwebtoken": "^9.0.10",

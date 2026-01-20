@@ -12,7 +12,7 @@ import ITokenPayload from '../templates/ITokenPayload';
 import ITokenResponse from '../templates/responses/ITokenResponse';
 import StatusCode from '../templates/StatusCode';
 
-const config = require('../../config/config.json');
+import config from '../config';
 
 // TODO: refresh 된 token은 폐기되어야 함 (아니면 무한복제 가능)
 class TokenManager {
@@ -41,34 +41,40 @@ class TokenManager {
 
 		const accessToken: string = jwt.sign(accessPayload, config.security.accessTokenSecret, {
 			algorithm: 'HS256',
-			expiresIn: config.security.accessTokenExpires,
+			expiresIn: config.security.accessTokenExpires as any,
 		});
 
 		const refreshToken: string = jwt.sign(refreshPayload, config.security.refreshTokenSecret, {
 			algorithm: 'HS256',
-			expiresIn: config.security.refreshTokenExpires,
+			expiresIn: config.security.refreshTokenExpires as any,
 		});
 
 		const accessTokenExpiresAt = now
 			.add(
-				config.security.accessTokenExpires.slice(
-					0,
-					config.security.accessTokenExpires.length - 1
+				parseInt(
+					config.security.accessTokenExpires.slice(
+						0,
+						config.security.accessTokenExpires.length - 1
+					),
+					10
 				),
 				config.security.accessTokenExpires.slice(
 					config.security.accessTokenExpires.length - 1
-				)
+				) as dayjs.ManipulateType
 			)
 			.unix();
 		const refreshTokenExpiresAt = now
 			.add(
-				config.security.refreshTokenExpires.slice(
-					0,
-					config.security.refreshTokenExpires.length - 1
+				parseInt(
+					config.security.refreshTokenExpires.slice(
+						0,
+						config.security.refreshTokenExpires.length - 1
+					),
+					10
 				),
 				config.security.refreshTokenExpires.slice(
 					config.security.refreshTokenExpires.length - 1
-				)
+				) as dayjs.ManipulateType
 			)
 			.unix();
 

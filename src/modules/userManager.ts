@@ -17,7 +17,7 @@ import IUserResponse from '../templates/responses/IUserResponse';
 import IApprovalCodes from '../templates/databases/approvalcodes';
 import ITokenResponse from '../templates/responses/ITokenResponse';
 
-const config = require('../../config/config.json');
+import config from '../config';
 
 const tokenManager = new TokenManager();
 

@@ -1,6 +1,6 @@
 import swaggerAutogen from 'swagger-autogen';
 
-const config = require('../../config/config.json');
+import config from '../config';
 
 const options = {
 	info: {

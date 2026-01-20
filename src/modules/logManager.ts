@@ -7,7 +7,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
-const config = require('../../config/config.json');
+import config from '../config';
 
 const enum LogLevel {
 	DEBUG,

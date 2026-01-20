@@ -1,6 +1,6 @@
 import * as Redis from 'redis';
 
-const config = require('../../config/config.json');
+import config from '../config';
 
 class RedisManager {
 	private static instance: RedisManager;

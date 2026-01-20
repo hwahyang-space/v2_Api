@@ -14,7 +14,7 @@ import ExceptionHandler from './modules/express/exceptionHandler';
 import MySQLConnector from './modules/mysqlConnector';
 import { LogLevel, LogManager, LogWorker } from './modules/logManager';
 
-const config = require('../config/config.json');
+import config from './config';
 const swaggerConfig = require('./swagger/swagger-output.json');
 
 const app = express();

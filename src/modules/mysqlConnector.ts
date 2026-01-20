@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 
-const config = require('../../config/config.json');
+import config from '../config';
 
 class MySQLConnector {
 	private static instance: MySQLConnector;
