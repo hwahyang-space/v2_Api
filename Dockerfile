@@ -38,6 +38,8 @@ ENV SECURITY_REFRESH_TOKEN_EXPIRES=3d
 
 ENV LOG_WORKER_INTERVAL=5000
 
+EXPOSE 8080
+
 # Install Redis (via Alpine Package Keeper)
 RUN apk add --no-cache redis
 

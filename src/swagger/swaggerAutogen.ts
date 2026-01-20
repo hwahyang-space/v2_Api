@@ -33,7 +33,12 @@ const options = {
 	},
 };
 
-swaggerAutogen({ openapi: '3.0.0' })('./swagger-output.json', ['../app.ts'], options)
+import path from 'path';
+
+const outputFile = path.join(__dirname, 'swagger-output.json');
+const endpointsFiles = [path.join(__dirname, '../app.ts')];
+
+swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, options)
 	.then(() => {
 		console.log('Swagger-autogen: Success');
 	})
