@@ -3,7 +3,7 @@ interface ITokenResponse {
 	accessTokenExpiresAt: number;
 	refreshToken: string;
 	refreshTokenExpiresAt: number;
-    type: 'ITokenResponse'
+	type: 'ITokenResponse';
 }
 
 export default ITokenResponse;

@@ -35,10 +35,10 @@ class Main {
   		}*/
 		const rawResponse = await mainPageManager.getBaseData();
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as IMain_BaseData;
+			const response = rawResponse;
 			res.json(response);
 		}
 	};
@@ -126,10 +126,10 @@ class Main {
   		}*/
 		const rawResponse = await mainPageManager.getLinksData();
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as IMain_Links[];
+			const response = rawResponse;
 			res.json(response);
 		}
 	};

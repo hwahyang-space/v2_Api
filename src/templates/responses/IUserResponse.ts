@@ -1,5 +1,5 @@
 interface IUserResponse {
-    uuid:string;
+	uuid: string;
 	userName: string;
 	email: string;
 	agreeTerms: boolean;

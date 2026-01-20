@@ -11,7 +11,7 @@ class File {
 		/*#swagger.security = [{
             "bearerAuth": []
     	}]*/
-        /*#swagger.consumes = ['multipart/form-data']  
+		/*#swagger.consumes = ['multipart/form-data']  
         #swagger.parameters['File'] = {
             in: 'file',
             type: 'file',
@@ -60,7 +60,7 @@ class File {
 			user: 'username',
 			password: 'password',
 		};
-        
+
 		ftp.connect(ftpConfig);
 
 		const fileBuffer = req.file.buffer;

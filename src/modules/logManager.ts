@@ -28,7 +28,7 @@ class LogManager {
 	}
 
 	// 무조건 병렬(비동기) 처리 !!
-	public log = async (logLevel: LogLevel, message: string) => {
+	public log = (logLevel: LogLevel, message: string) => {
 		const now = dayjs();
 
 		let printMessage = colors.green(`<${now.format('YYYY-MM-DD HH:mm:ss Z')}> `);
@@ -90,7 +90,7 @@ class LogWorker {
 		this.messageQueue += message + '\n';
 	};
 
-	private processWorker = async () => {
+	private processWorker = () => {
 		if (this.messageQueue === '') return;
 
 		const now = dayjs();
@@ -99,14 +99,14 @@ class LogWorker {
 		const currentQueue = this.messageQueue;
 		this.messageQueue = '';
 
-		if (!await fs.existsSync(this.rootPath)) {
-			await fs.mkdirSync(this.rootPath);
+		if (!fs.existsSync(this.rootPath)) {
+			fs.mkdirSync(this.rootPath);
 		}
 
-		if (await fs.existsSync(fullPath)) {
-			await fs.appendFileSync(fullPath, currentQueue, { encoding: 'utf-8' });
+		if (fs.existsSync(fullPath)) {
+			fs.appendFileSync(fullPath, currentQueue, { encoding: 'utf-8' });
 		} else {
-			await fs.writeFileSync(fullPath, currentQueue, { encoding: 'utf-8' });
+			fs.writeFileSync(fullPath, currentQueue, { encoding: 'utf-8' });
 		}
 	};
 }

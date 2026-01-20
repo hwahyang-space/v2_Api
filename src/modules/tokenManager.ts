@@ -112,15 +112,15 @@ class TokenManager {
 
 		const tokenRawResponse = this.validateSessionToken(refreshToken, false);
 		if (tokenRawResponse instanceof StatusCode) {
-			return tokenRawResponse as StatusCode;
+			return tokenRawResponse;
 		} else {
-			const tokenResponse = tokenRawResponse as ITokenPayload;
+			const tokenResponse = tokenRawResponse;
 
 			// 최근 접속일 갱신
-			MySQLConnector.Instance().Query('UPDATE users SET lastLoggedInAt = ? WHERE uuid = ?', [
-				now.unix(),
-				tokenResponse.uuid,
-			]);
+			void MySQLConnector.Instance().Query(
+				'UPDATE users SET lastLoggedInAt = ? WHERE uuid = ?',
+				[now.unix(), tokenResponse.uuid]
+			);
 
 			this.logManager.log(
 				LogLevel.LOG,

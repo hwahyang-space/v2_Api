@@ -62,7 +62,7 @@ class UserManager {
 		}
 
 		// 비밀번호 검증
-		const key = await pbkdf2Sync(
+		const key = pbkdf2Sync(
 			userPassword,
 			userData[0].salt,
 			config.security.passwordIteration,
@@ -79,12 +79,15 @@ class UserManager {
 			);
 		} else {
 			// 최근 접속일 갱신
-			MySQLConnector.Instance().Query('UPDATE users SET lastLoggedInAt = ? WHERE uuid = ?', [
-				now.unix(),
-				userData[0].uuid,
-			]);
+			await MySQLConnector.Instance().Query(
+				'UPDATE users SET lastLoggedInAt = ? WHERE uuid = ?',
+				[now.unix(), userData[0].uuid]
+			);
 
-			this.logManager.log(LogLevel.LOG, `An user '${userData[0].userName}' (with uuid ${userData[0].uuid}) successfully signed-in`);
+			this.logManager.log(
+				LogLevel.LOG,
+				`An user '${userData[0].userName}' (with uuid ${userData[0].uuid}) successfully signed-in`
+			);
 
 			// 토큰 발급
 			return tokenManager.createSessionToken(userData[0].uuid);
@@ -164,7 +167,7 @@ class UserManager {
 
 		// 비밀번호 처리
 		const salt = await this.createSalt();
-		const key = await crypto.pbkdf2Sync(
+		const key = crypto.pbkdf2Sync(
 			userPassword,
 			salt,
 			config.security.passwordIteration,
@@ -179,10 +182,23 @@ class UserManager {
 		// 회원 등록
 		await MySQLConnector.Instance().Query(
 			'INSERT INTO users(uuid, userName, email, password, salt, approvalcode, agreeTerms, createdAt, lastLoggedInAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-			[uuid, userName, userEmail, hashedPassword, salt, approvalCode, agreeTerms, now.unix(), now.unix()]
+			[
+				uuid,
+				userName,
+				userEmail,
+				hashedPassword,
+				salt,
+				approvalCode,
+				agreeTerms,
+				now.unix(),
+				now.unix(),
+			]
 		);
 
-		this.logManager.log(LogLevel.LOG, `An user '${userData[0].userName}' (with uuid ${userData[0].uuid}) successfully signed-up`);
+		this.logManager.log(
+			LogLevel.LOG,
+			`An user '${userData[0].userName}' (with uuid ${userData[0].uuid}) successfully signed-up`
+		);
 
 		// 토큰 발급
 		return tokenManager.createSessionToken(uuid);

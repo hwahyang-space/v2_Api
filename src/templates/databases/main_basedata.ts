@@ -4,8 +4,8 @@ interface IMain_BaseData extends RowDataPacket {
 	id: number;
 	frontName: string;
 	backName: string;
-    description: string;
-    profileImage: string;
+	description: string;
+	profileImage: string;
 	backgroundImage: string;
 }
 

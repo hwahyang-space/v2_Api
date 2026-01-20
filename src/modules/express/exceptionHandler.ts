@@ -33,9 +33,7 @@ class ExceptionHandler {
 		next: express.NextFunction
 	) => {
 		this.logManager.log(LogLevel.ERROR, `An RateLimit ocurred in ${req.url}: ${req.ip}`);
-		res.status(429).json(
-			new StatusCode(429, 'Too Many Requests', 'Try again later.')
-		);
+		res.status(429).json(new StatusCode(429, 'Too Many Requests', 'Try again later.'));
 	};
 }
 

@@ -24,13 +24,19 @@ const options = {
 		},
 	],
 	components: {
-        securitySchemes:{
-            bearerAuth: {
-                type: 'http',
-                scheme: 'bearer'
-            }
-        }
-    }
+		securitySchemes: {
+			bearerAuth: {
+				type: 'http',
+				scheme: 'bearer',
+			},
+		},
+	},
 };
 
-swaggerAutogen({ openapi: '3.0.0' })('./swagger-output.json', ['../app.ts'], options);
+swaggerAutogen({ openapi: '3.0.0' })('./swagger-output.json', ['../app.ts'], options)
+	.then(() => {
+		console.log('Swagger-autogen: Success');
+	})
+	.catch((err: unknown) => {
+		console.error('Swagger-autogen: Error', err);
+	});

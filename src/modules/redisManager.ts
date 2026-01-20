@@ -11,32 +11,23 @@ class RedisManager {
 		return this.instance;
 	};
 
-	private readonly client;
+	private readonly client: ReturnType<typeof Redis.createClient>;
 	constructor() {
 		this.client = Redis.createClient({
 			socket: {
 				host: config.redis.host,
 				port: config.redis.port,
 			},
-			legacyMode: true,
 		});
-		this.client.connect();
+		void this.client.connect();
 	}
 
-	public get = async (key: string): Promise<string> => {
-		try {
-			return await this.client.v4.get(key);
-		} catch (e) {
-			throw e;
-		}
+	public get = async (key: string): Promise<string | null> => {
+		return await this.client.get(key);
 	};
 
 	public set = async (key: string, value: string | null) => {
-		try {
-			return await this.client.v4.set(key, value);
-		} catch (e) {
-			throw e;
-		}
+		return await this.client.set(key, value!);
 	};
 
 	public disconnect = async () => {

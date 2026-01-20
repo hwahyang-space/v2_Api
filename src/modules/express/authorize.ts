@@ -65,10 +65,10 @@ class Authorize {
 
 		const rawResponse = await userManager.signIn(req.body.email, req.body.password);
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as ITokenResponse;
+			const response = rawResponse;
 			res.json(response);
 		}
 	};
@@ -131,10 +131,10 @@ class Authorize {
 		);
 
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as ITokenResponse;
+			const response = rawResponse;
 			res.json(response);
 		}
 	};
@@ -152,10 +152,10 @@ class Authorize {
 
 		const rawResponse = tokenManager.validateSessionToken(token);
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as ITokenPayload;
+			const response = rawResponse;
 			req.uuid = response.uuid;
 			next();
 		}
@@ -194,10 +194,10 @@ class Authorize {
 
 		const rawResponse = tokenManager.refreshSessionToken(token);
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as ITokenResponse;
+			const response = rawResponse;
 			res.status(200).json(response);
 		}
 	};
@@ -244,10 +244,10 @@ class Authorize {
 
 		const rawResponse = await userManager.getUserData(req.uuid);
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
-			const response = rawResponse as IUserResponse;
+			const response = rawResponse;
 			res.status(200).json(response);
 		}
 	};
@@ -282,7 +282,7 @@ class Authorize {
 
 		const rawResponse = tokenManager.validateSessionToken(token);
 		if (rawResponse instanceof StatusCode) {
-			const response = rawResponse as StatusCode;
+			const response = rawResponse;
 			res.status(response.code).json(response);
 		} else {
 			res.status(200).json(new StatusCode(200, '', ''));
