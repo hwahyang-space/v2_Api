@@ -44,6 +44,9 @@ RUN apk add --no-cache redis
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/src/public ./dist/public
+COPY --from=builder /app/src/swagger/swagger-output.json ./dist/swagger/swagger-output.json
+COPY --from=builder /app/config ./config
+RUN if [ ! -f ./config/config.json ]; then cp ./config/config.json.SAMPLE ./config/config.json; fi
 COPY entrypoint.sh ./
 
 RUN npm install --omit=dev && chmod +x entrypoint.sh
