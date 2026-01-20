@@ -1,6 +1,6 @@
 {
   "name": "api.hwahyang.space_v2",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "hwahyang.space v2 api",
   "main": "dist/app.js",
   "scripts": {
@@ -14,12 +14,12 @@
     "type": "git",
     "url": "git+https://github.com/hwahyang-space/v2_Api.git"
   },
-  "author": "HwaHyang",
+  "author": "MeowLabs",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/hwahyang-space/v2_Api/issues"
   },
-  "homepage": "https://hwahyang.space",
+  "homepage": "https://meowlabs.kr",
   "dependencies": {
     "colors": "^1.4.0",
     "cors": "^2.8.5",
