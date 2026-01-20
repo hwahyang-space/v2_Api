@@ -43,7 +43,7 @@ RUN apk add --no-cache redis
 
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/public ./public
+COPY --from=builder /app/src/public ./dist/public
 COPY entrypoint.sh ./
 
 RUN npm install --omit=dev && chmod +x entrypoint.sh

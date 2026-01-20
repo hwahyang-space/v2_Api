@@ -8,6 +8,7 @@
     "test": "ts-node src/swagger/swaggerAutogen.ts && ts-node src/app.ts",
     "build": "ts-node src/swagger/swaggerAutogen.ts && tsc --project tsconfig.json",
     "build-only": "tsc --project tsconfig.json",
+    "start": "node dist/app.js",
     "run": "node dist/app.js"
   },
   "repository": {

@@ -84,7 +84,7 @@ app.post('/api/v2/file/', authorize.validateToken, upload.single('file'), file.p
 
 // Static
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use('/', express.static('src/public'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 // Exception Handling
 app.use(exceptionHandler.NotFoundExceptionHandler, exceptionHandler.UnhandledExceptionHandler);
